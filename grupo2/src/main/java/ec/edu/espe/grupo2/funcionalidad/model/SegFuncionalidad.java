@@ -13,6 +13,7 @@ public class SegFuncionalidad implements Serializable{
 
     @EmbeddedId
     private SegFuncionalidadPK pk;
+    
     @Id
     @NotNull
     @Column (name = "COD_FUNCIONALIDAD", nullable = false, length = 16)

@@ -1,74 +1,137 @@
 package ec.edu.espe.grupo2.registro.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "SEG_REGISTRO_SESION")
 public class SegRegistroSesion implements Serializable{
     
     @Id
-    
+    @Column (name = "SECUENCIA", nullable = false)
+    private String secuencia;
+
+    @NotNull
+    @Column(name = "COD_USUARIO", nullable = false, length = 32)
+    private String nombre;
+
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column (name = "FECHA_CONEXION", nullable = false)
+    private LocalDate fechaConexion;
+
+    @NotNull
+    @Column (name = "IP_CONEXION", nullable = false, length = 24)
+    private String ipConexion;
+
+    @NotNull
+    @Column (name = "RESULTADO", nullable = false, length=3)
+    private String resultado;
+
+    @NotNull
+    @Column (name="COD_ERROR", nullable = false, length=5)
+    private String codError;
+
     public SegRegistroSesion() {
     }
 
-    public SegRegistroSesion(String codRegistroSesion, String codUsuario, String codSesion, String fechaInicio, String fechaFin, String estado) {
-        this.codRegistroSesion = codRegistroSesion;
-        this.codUsuario = codUsuario;
-        this.codSesion = codSesion;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.estado = estado;
+    public SegRegistroSesion(String secuencia, @NotNull String nombre, LocalDate fechaConexion,
+            @NotNull String ipConexion, @NotNull String resultado, String codError) {
+        this.secuencia = secuencia;
+        this.nombre = nombre;
+        this.fechaConexion = fechaConexion;
+        this.ipConexion = ipConexion;
+        this.resultado = resultado;
+        this.codError = codError;
     }
 
-    public String getCodRegistroSesion() {
-        return codRegistroSesion;
+    public String getSecuencia() {
+        return secuencia;
     }
 
-    public void setCodRegistroSesion(String codRegistroSesion) {
-        this.codRegistroSesion = codRegistroSesion;
+    public void setSecuencia(String secuencia) {
+        this.secuencia = secuencia;
     }
 
-    public String getCodUsuario() {
-        return codUsuario;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCodUsuario(String codUsuario) {
-        this.codUsuario = codUsuario;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getCodSesion() {
-        return codSesion;
+    public LocalDate getFechaConexion() {
+        return fechaConexion;
     }
 
-    public void setCodSesion(String codSesion) {
-        this.codSesion = codSesion;
+    public void setFechaConexion(LocalDate fechaConexion) {
+        this.fechaConexion = fechaConexion;
     }
 
-    public String getFechaInicio() {
-        return fechaInicio;
+    public String getIpConexion() {
+        return ipConexion;
     }
 
-    public void setFechaInicio(String fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setIpConexion(String ipConexion) {
+        this.ipConexion = ipConexion;
     }
 
-    public String getFechaFin() {
-        return fechaFin;
+    public String getResultado() {
+        return resultado;
     }
 
-    public void setFechaFin(String fechaFin) {
-        this.fechaFin = fechaFin;
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getCodError() {
+        return codError;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setCodError(String codError) {
+        this.codError = codError;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((secuencia == null) ? 0 : secuencia.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        SegRegistroSesion other = (SegRegistroSesion) obj;
+        if (secuencia == null) {
+            if (other.secuencia != null)
+                return false;
+        } else if (!secuencia.equals(other.secuencia))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "SegRegistroSesion [secuencia=" + secuencia + ", nombre=" + nombre + ", fechaConexion=" + fechaConexion
+                + ", ipConexion=" + ipConexion + ", resultado=" + resultado + ", codError=" + codError + "]";
+    }
+    
+    
 }
